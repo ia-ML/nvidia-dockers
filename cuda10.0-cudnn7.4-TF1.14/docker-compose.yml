@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  jupyter:
+    image: ia-notebook-gpu:cuda-10.0
+    container_name: iaNotesGpu
+    ports:
+      - "5001:8888"
+    volumes:
+      - type: bind
+        source: ./jpData
+        target: /workspace
+    command: ["jupyter", "notebook", "--ip='0.0.0.0'", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+    runtime: nvidia  # specify the NVIDIA runtime
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+volumes:
+  jpData:
+    external: true
+

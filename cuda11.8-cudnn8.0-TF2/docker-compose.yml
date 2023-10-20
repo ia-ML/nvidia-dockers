@@ -1,0 +1,13 @@
+version: '3'
+services:
+  dnnPyServer:
+    image: dnn-python-server:1.0
+    container_name: dnn-py-server
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "5000:5000" 
+    volumes:
+      - ./dnn-code:/app/dnn-code/ 
+      - ./uploads:/app/uploads/ 
